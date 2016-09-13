@@ -7,17 +7,27 @@ import sys
 ip_addr = sys.argv[1]
 
 #split address into octets
-ip_addr = ip_addr.split('.')
+split_ip_addr = ip_addr.split('.')
 
-print ip_addr
+# create octet_bin blank list
+octet_bin = []
 
-for i,j in enumerate(ip_addr):
-    #octet+str(i) = ip_addr[j]
-    print i
-    print j
-#print octet0
-#print octet1
-#print octet2
-#print octet3
-    ip_addr_bin.append(bin(int(j)))
-    print ip_addr_bin
+# convert decimal octets to binary, strip 0b
+for i,j in enumerate(split_ip_addr):
+    octet = (int(j))
+    octet = bin(octet)
+    octet = octet.split('b')
+    octet = octet[1]
+
+# prepend with zeroes to 8 characters
+    while len(str(octet)) < 8:
+        octet = '0' + octet
+
+    octet_bin.append(octet)
+
+# join binary octets to dotted notation
+ip_addr_bin = ".".join(octet_bin)
+
+# formatted output
+print "{0:^15} {1:^15}".format("IP Address","Binary")
+print "{0:^15} {1:^15}".format(ip_addr,ip_addr_bin)
