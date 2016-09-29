@@ -15,18 +15,22 @@ while ip_valid == 1:
     #Check that the IP address contains 4 octets.
     if len(ip_addr) != 4:
         ip_valid = 0
+        break
 
     #The first octet must be between 1 - 223.
     if int(ip_addr[0]) >= 223 or int(ip_addr[0]) <= 1:
         ip_valid = 0
+        break
 
     #The first octet cannot be 127.
     if int(ip_addr[0]) == 127:
         ip_valid = 0
+        break
 
     #The IP address cannot be in the 169.254.X.X address space.
     if int(ip_addr[0]) == 169 and int(ip_addr[1]) == 254:
         ip_valid = 0
+        break
 
     #The last three octets must range between 0 - 255.
     for element in ip_addr:
